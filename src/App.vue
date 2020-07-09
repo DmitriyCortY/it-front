@@ -4,19 +4,19 @@
       <router-view></router-view>
     </transition>
     
-    <!-- <div class="b-constructor-steps b-main__steps">
+    <div class="b-constructor-steps b-main__steps">
       <div class="b-constructor-steps__inner">
         <div class="b-constructor-steps__col-left">
           <div class="b-constructor-steps__counter">
-            <div class="b-constructor-steps__item" :class="[$router.currentRoute === 1 ? 'active' : '', $router.currentRoute <= 1 ? 'b-step-button-disable' : '']" @click="select_step(1)">
+            <router-link class="b-constructor-steps__item" :to="{path: '/step-1'}" :class="[$router.currentRoute.path === '/step-1' ? 'active' : '']">
               1
-            </div>
-            <div class="b-constructor-steps__item" :class="[$router.currentRoute === 2 ? 'active' : '', $router.currentRoute <= 2 ? 'b-step-button-disable' : '']" @click="select_step(2)">
+            </router-link>
+            <router-link class="b-constructor-steps__item" :to="{path: '/step-2'}" :class="[$router.currentRoute.path === '/step-2' ? 'active' : '',  $router.currentRoute.path === '/step-1' ? 'b-step-button-disable' : '']">
               2
-            </div> 
-            <div class="b-constructor-steps__item" :class="[$router.currentRoute === 3 ? 'active' : '', $router.currentRoute <= 3 ? 'b-step-button-disable' : '']" @click="select_step(3)">
+            </router-link> 
+            <router-link class="b-constructor-steps__item" :to="{path: '/step-3'}" :class="[$router.currentRoute.path === '/step-3' ? 'active' : '', $router.currentRoute.path === '/step-1' || $router.currentRoute.path === '/step-2' ? 'b-step-button-disable' : '']">
               3
-            </div>
+            </router-link>
           </div>
         </div> 
         <div class="b-constructor-steps__col-right">
@@ -25,7 +25,7 @@
           </div>
         </div>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -41,6 +41,9 @@ export default {
   created(){
     this.$store.dispatch('load_all_start_datas')
     this.$router.push({path: '/'})
+    setInterval(() => {
+      console.log(this.$router.currentRoute.path)
+    }, 1000)
   },
   watch: {
     
@@ -102,5 +105,11 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
   opacity: 0;
+}
+.b-constructor-steps__item{
+  display: block;
+}
+.b-step-button-disable{
+  pointer-events: none;
 }
 </style>
