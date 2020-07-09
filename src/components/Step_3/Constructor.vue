@@ -93,6 +93,14 @@ export default {
         window.addEventListener('resize', ()=> {
             this.get_radio(this.skeleton_data.image_front, 'front')
             this.get_radio(this.skeleton_data.image_back, 'back')
+            setTimeout(() => {
+                this.get_radio(this.skeleton_data.image_front, 'front')
+                this.get_radio(this.skeleton_data.image_back, 'back')
+                setTimeout(() => {
+                    this.get_radio(this.skeleton_data.image_front, 'front')
+                    this.get_radio(this.skeleton_data.image_back, 'back')
+                }, 333)
+            }, 333)
         })
     },
     methods: {
